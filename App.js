@@ -1,21 +1,28 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Image } from 'react-native';
 
 export default function App() {
-	console.log('App executed');
-	let x = 1;
-	console.log('testing');
+	function handlePress() {
+		console.log('Button pressed');
+	}
 	return (
-		<View style={styles.container}>
-			<Text>Sell sell sell</Text>
-		</View>
+		<SafeAreaView style={styles.container}>
+			<Text onPress={handlePress()}>I like to app</Text>
+			<Image
+				source={{
+					width: 200,
+					height: 300,
+					uri: 'https://i.kym-cdn.com/entries/icons/original/000/028/539/DyqSKoaX4AATc2G.jpg'
+				}}
+			/>
+		</SafeAreaView>
 	);
 }
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#fff',
+		backgroundColor: 'dodgerblue',
 		alignItems: 'center',
 		justifyContent: 'center'
 	}
