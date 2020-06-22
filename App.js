@@ -1,29 +1,45 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Image } from 'react-native';
+import { useDeminsions } from '@react-native-community/hooks';
+import {
+	Dimensions,
+	StyleSheet,
+	Text,
+	View,
+	SafeAreaView,
+	Image,
+	TouchableWithoutFeedback,
+	TouchableOpacity,
+	TouchableNativeFeedback,
+	Button,
+	Alert,
+	Platform,
+	StatusBar
+} from 'react-native';
 
 export default function App() {
+	console.log(useDimensions());
 	function handlePress() {
 		console.log('Button pressed');
 	}
 	return (
 		<SafeAreaView style={styles.container}>
-			<Text onPress={handlePress()}>I like to app</Text>
-			<Image
-				source={{
-					width: 200,
-					height: 300,
-					uri: 'https://i.kym-cdn.com/entries/icons/original/000/028/539/DyqSKoaX4AATc2G.jpg'
-				}}
+			<Button
+				color="orange"
+				title="Click Me"
+				onPress={() => Alert.alert('My titlw', '"My massage', [ { text: '1' }, { text: '2' } ])}
 			/>
 		</SafeAreaView>
 	);
 }
 
+const containerStyle = { backGroundColor: 'orange' };
+
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: 'dodgerblue',
-		alignItems: 'center',
-		justifyContent: 'center'
+		backgroundColor: 'white',
+		width: '100%',
+		height: '30%',
+		paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
 	}
 });
