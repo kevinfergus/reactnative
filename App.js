@@ -1,5 +1,5 @@
-import React from 'react';
-import { useDeminsions } from '@react-native-community/hooks';
+import React, { useState } from 'react';
+import { useDimensions, useDeviceOrientation } from '@react-native-community/hooks';
 import {
 	Dimensions,
 	StyleSheet,
@@ -17,18 +17,43 @@ import {
 } from 'react-native';
 
 export default function App() {
-	console.log(useDimensions());
+	const [ welcome, setWelcome ] = useState(true);
 	function handlePress() {
 		console.log('Button pressed');
 	}
-	return (
-		<SafeAreaView style={styles.container}>
-			<Button
-				color="orange"
-				title="Click Me"
-				onPress={() => Alert.alert('My titlw', '"My massage', [ { text: '1' }, { text: '2' } ])}
+	const { landscape } = useDeviceOrientation();
+	console.log(welcome);
+	return !welcome ? (
+		<View
+			style={{
+				backgroundColor: 'white',
+				flex: 1,
+				flexDirection: 'row',
+				justifyContent: 'center',
+				alignItems: 'center'
+			}}
+		>
+			<Button title={'click me'} onPress={() => setWelcome(!welcome)} />
+			<View
+				style={{
+					backgroundColor: 'pink',
+					width: 100,
+					height: 100,
+					top: -20
+				}}
 			/>
-		</SafeAreaView>
+			<View
+				style={{
+					backgroundColor: 'gold',
+					width: 100,
+					height: 100
+				}}
+			/>
+		</View>
+	) : (
+		<View style={{ top: 200 }}>
+			<Button title={'click me'} onPress={() => setWelcome(!welcome)} />
+		</View>
 	);
 }
 
@@ -39,7 +64,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: 'white',
 		width: '100%',
-		height: '30%',
+		height: App.landscape ? '100%' : '30%',
 		paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
 	}
 });
